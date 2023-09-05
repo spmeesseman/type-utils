@@ -1,8 +1,8 @@
 {
     "name": "@spmeesseman/type-utils",
     "version": "0.0.1",
-    "displayName": "Types Utility Functions",
-    "description": "Types utilities for primitive types, object, array and more",
+    "displayName": "SPM-Type-Utils",
+    "description": "Types utility functions for primitive types, object, array and more",
     "license": "MIT",
     "homepage": "https://github.com/spmeesseman/type-utils/blob/master/README.md",
     "author": {

@@ -1,10 +1,20 @@
+/* eslint-disable jsdoc/check-param-names */
+ /**
+  * @template T, U
+  * @typedef {object} MergeOptions
+  * @property {boolean} onlyIf
+  * @property {boolean} deepObj
+  * @property {boolean} deepArr
+  * @property {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
+  */
+export declare interface MergeOptions<T, U> { onlyIf?: boolean; deepObj?: boolean;  deepArr?: boolean; values?: (T | Partial<T> | U)[] }
 /**
  * @template T
- * @param {T} v Variable to check to see if it's an array
+ * @param {T | T[]} v Variable to check to see if it's an array
  * @param {boolean} [allowEmp] If `true`, return true if v is an empty array
  * @returns {v is T[]}
  */
-export function isArray<T>(v: T, allowEmp?: boolean): v is T[];
+export function isArray<T>(v: T | T[], allowEmp?: boolean): v is T[];
 /**
  * @param {any} v Variable to check to see if it's a primitive boolean type
  * @returns {v is boolean}
@@ -37,12 +47,12 @@ export function isFunction(v: any): boolean;
  */
 export function isJsTsConfigPath(path: string | undefined): boolean;
 /**
- * @template {object}[T=Record<string, any>]
+ * @template {object | undefined}[T=Record<string, any>]
  * @param {T | undefined | null} v Variable to check to see if it's an array
  * @param {boolean} [allowArray] If `true`, return true if v is an array
- * @returns {v is T}
+ * @returns {v is NonNullable<T>}
  */
-export function isObject<T extends object = Record<string, any>>(v: T, allowArray?: boolean): v is T;
+export function isObject<T extends object | undefined = Record<string, any>>(v: T, allowArray?: boolean): v is NonNullable<T>;
 /**
  * @param {any} v Variable to check to see if it's and empty object
  * @returns {boolean}
@@ -66,8 +76,6 @@ export function isPromise<T>(v: any): v is PromiseLike<T>;
  * @returns {v is string}
  */
 export function isString(v: any, notEmpty?: boolean, stringifyable?: boolean): v is string;
-
-export type MergeOptions = import("../types/generic").MergeOptions<any, any>;
 /**
  * @template {object}T
  * @template {Partial<T> | object} U
@@ -78,7 +86,6 @@ export type MergeOptions = import("../types/generic").MergeOptions<any, any>;
  * @throws {Error}
  */
 export function apply<T extends object, U extends object | Partial<T>>(dst: T | Partial<T>, src: T | Partial<T> | U, defaults?: T | Partial<T> | U): T;
-/** @typedef {import("../types").MergeOptions} MergeOptions */
 /**
  * @template {object}T
  * @template {Partial<T> | object} U
@@ -133,7 +140,7 @@ export function mergeExt<T extends object, U extends object | Partial<T>>(onlyIf
  * @returns {T}
  * @throws {Error}
  */
-export function mergeExt2<T extends object>(options: import("../types/generic").MergeOptions<any, any>): T;
+export function mergeExt2<T extends object>(options: MergeOptions<any, any>): T;
 /**
  * @template {object}T
  * @template {Partial<T> | object}  U
