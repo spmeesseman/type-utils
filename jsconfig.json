@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "alwaysStrict": false,
+      "allowJs": true,
+      "allowUnreachableCode": false,
+      "allowUnusedLabels": false,
+      "baseUrl": ".",
+      "experimentalDecorators": true,
+      "incremental": true,
+      "lib": [
+        "es2020"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noEmit": false,
+      "noFallthroughCasesInSwitch": false,
+      "noImplicitAny": false,
+      "noImplicitOverride": false,
+      "noImplicitReturns" : false,
+      "noImplicitUseStrict": true,
+      "noImplicitThis": false,
+      "noPropertyAccessFromIndexSignature": false,
+      "noResolve": false,
+      "noUncheckedIndexedAccess": false,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "outDir": "dist",
+      "resolveJsonModule": true,
+      "rootDir": "src",
+      "skipDefaultLibCheck": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "strictBindCallApply": true,
+      "strictFunctionTypes": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "suppressExcessPropertyErrors": true,
+      "target": "es2020",
+      "tsBuildInfoFile": "./node_modules/.cache/wpwrap/tsconfig.tsbuildinfo",
+      "useUnknownInCatchVariables": false
+    },
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+        ".*",
+        "bin",
+        "dist",
+        "doc",
+        "examples",
+        "node_modules",
+        "res",
+        "schema",
+        "test-fixture",
+        "**/types/**",
+        "src/plugins/analyze/visualizer.js"
+    ]
+}

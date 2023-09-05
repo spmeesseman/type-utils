@@ -1,0 +1,84 @@
+{
+    "name": "@spmeesseman/type-utils",
+    "version": "0.0.1",
+    "displayName": "Types Utility Functions",
+    "description": "Types utilities for primitive types, object, array and more",
+    "license": "MIT",
+    "homepage": "https://github.com/spmeesseman/type-utils/blob/master/README.md",
+    "author": {
+        "name": "Scott Meesseman",
+        "email": "spmeesseman@gmail.com"
+    },
+    "bugs": {
+        "url": "https://github.com/spmeesseman/type-utils/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/spmeesseman/type-utils.git"
+    },
+    "categories": [
+        "Other"
+    ],
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "keywords": [
+        "javascript",
+        "typescript",
+        "types",
+        "utility",
+        "utilities"
+    ],
+    "main": "./src/index.js",
+    "types": "./src/types.d.ts",
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build-types": "tsc -p ./",
+        "build-prod": "webpack --mode production --config ./webpack.config.js",
+        "build-analyze": "webpack --mode production --env analyze=true --config ./webpack.config.js",
+        "build-dev": "webpack --mode development --config ./webpack.config.js",
+        "clean-all": "npm run clean-build && npm run clean-types",
+        "clean-build": "rimraf dist",
+        "clean-types": "rimraf dist/types && rimraf node_modules/.cache/tsconfig.tsbuildinfo",
+        "copy_to-all": "npm run copy_to-extjs && npm run copy_to-taskexplorer",
+        "copy_to-extjs": "cmd /c xcopy .\\dist\\*.* ..\\..\\vscode-extjs\\node_modules\\@spmeesseman\\test-utils\\dist /s /i /y && cmd /c xcopy .\\package*.json ..\\..\\vscode-extjs\\node_modules\\@spmeesseman\\test-utils /i /y",
+        "copy_to-taskexplorer": "cmd /c xcopy .\\dist\\*.* ..\\..\\vscode-taskexplorer\\node_modules\\@spmeesseman\\test-utils\\dist /s /i /y && cmd /c xcopy .\\package*.json ..\\..\\vscode-taskexplorer\\node_modules\\@spmeesseman\\test-utils /i /y",
+        "rebuild-dev": "npm run clean-all && npm run build-dev",
+        "rebuild-prod": "npm run clean-all && npm run build-prod",
+        "rebuild-types": "npm run clean-types &&  && npm run build-types"
+    },
+    "bundleDependencies": [
+        "resolve-from",
+        "source-map-support"
+    ],
+    "optionalDependencies": {
+        "mocha": "^10.2.0",
+        "nyc": "^15.1.0"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "@spmeesseman/eslint-plugin": "^1.0.0",
+		"@spmeesseman/webpack-wrap": "file:../@spmeesseman/webpack-wrap",
+        "@types/glob": "^8.1.0",
+        "@types/mocha": "^9.1.0",
+        "@types/node": "^16.18.34",
+        "@typescript-eslint/eslint-plugin": "^5.60.1",
+        "@typescript-eslint/eslint-plugin-tslint": "^5.60.1",
+        "@typescript-eslint/parser": "^5.60.1",
+        "eslint": "^8.43.0",
+        "eslint-plugin-anti-trojan-source": "^1.1.1",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jsdoc": "^46.2.6",
+        "eslint-plugin-no-null": "^1.0.2",
+        "eslint-plugin-prefer-arrow": "^1.2.3",
+        "eslint-plugin-prettier": "^4.2.1",
+        "rimraf": "^5.0.1",
+		"typescript": "^4.5.5"
+    }
+}
