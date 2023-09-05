@@ -116,31 +116,31 @@ export function applyIf<T extends object, U extends object | Partial<T>>(dst: T 
  */
 export function clone<T>(item: T): T;
 /**
- * @template {object}T
- * @template {Partial<T> | object}  U
+ * @template {object | undefined}T
+ * @template {Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {T}
+ * @returns {NonNullable<T>}
  * @throws {Error}
  */
-export function merge<T extends object, U extends object | Partial<T>>(values_0: T | Partial<T>, ...values_1: (T | Partial<T> | U)[]): T;
+export function merge<T extends object | undefined, U extends object | undefined | Partial<T>>(values_0: T | Partial<T>, ...values_1: (T | Partial<T> | U)[]): NonNullable<T>;
 /**
- * @template {object}T
- * @template {Partial<T> | object}  U
+ * @template {object | undefined}T
+ * @template {Partial<T> | object | undefined}  U
  * @param {boolean} onlyIf merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} deepObj if both dst and src values to merge are objects, merge properties (relevant if {@link onlyIf} parameter is `true`)
  * @param {boolean} deepArr merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values array of objects to merge, where the fist object is the `base` object that's returned in the merged state
- * @returns {T}
+ * @returns {NonNullable<T>}
  * @throws {Error}
  */
-export function mergeExt<T extends object, U extends object | Partial<T>>(onlyIf: boolean, deepObj: boolean, deepArr: boolean, values_0: T | Partial<T>, ...values_1: (T | Partial<T> | U)[]): T;
+export function mergeExt<T extends object | undefined, U extends object | undefined | Partial<T>>(onlyIf: boolean, deepObj: boolean, deepArr: boolean, values_0: T | Partial<T> | undefined, ...values_1: (T | Partial<T> | U | undefined)[]): NonNullable<T>;
 /**
- * @template {object}T
+ * @template {object | undefined}T
  * @param {MergeOptions} options
- * @returns {T}
+ * @returns {NonNullable<T>}
  * @throws {Error}
  */
-export function mergeExt2<T extends object>(options: MergeOptions<any, any>): T;
+export function mergeExt2<T extends object>(options: MergeOptions<any, any>): NonNullable<T>;
 /**
  * @template {object}T
  * @template {Partial<T> | object}  U

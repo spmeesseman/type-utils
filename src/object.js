@@ -59,22 +59,6 @@ const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
  * @throws {Error}
  */
 const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults);
-// const apply = (dst, src, defaults) =>
-// {
-//     if (dst === undefined) {
-//         dst = {};
-//     }
-//     if (isObject(dst))
-//     {
-//         if (isObject(defaults)) {
-//             apply(dst, defaults);
-//         }
-//         if (isObject(src)) {
-//             Object.keys(src).forEach(i => { /** @type {{}} */(dst)[i] = src[i]; });
-//         }
-//     }
-//     return /** @type {T} */(dst);
-// };
 
 
 /**
@@ -88,22 +72,6 @@ const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults)
  * @throws {Error}
  */
 const applyIf = (dst, src) => applyExt(true, false, dst, src);
-// const applyIf = (dst, src) =>
-// {
-//     if (dst === undefined) {
-//         dst = {};
-//     }
-//     if (dst && isObject(src))
-//     {
-//         let property;
-//         for (property in src) {
-//             if (dst[property] === undefined) {
-//                 dst[property] = src[property];
-//             }
-//         }
-//     }
-//     return /** @type {T} */(dst);
-// };
 
 
 /**
@@ -151,13 +119,13 @@ const mergeExt2 = (options) =>
 
 
 /**
- * @template {object} T
- * @template {Partial<T> | object}  U
+ * @template {object | undefined} T
+ * @template {Partial<T> | object | undefined}  U
  * @param {boolean} [onlyIf] merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} [deepObj] if both dst and src values to merge are objects, merge properties (relevant if {@link onlyIf} parameter is `true`)
  * @param {boolean} [deepArr] merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values array of objects to merge, where the fist object is the `base` object that's returned in the merged state
- * @returns {T}
+ * @returns {NonNullable<T>}
  * @throws {Error}
  */
 const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
@@ -210,49 +178,18 @@ const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
             }
         }
     }
-    return /** @type {T} */(base);
+    return /** @type {NonNullable<T>} */(base);
 };
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}}  U
+ * @template {object | undefined} T
+ * @template {Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {T}
+ * @returns {NonNullable<T>}
  * @throws {Error}
  */
 const merge = (...values) => mergeExt(false, true, false, ...values);
-// const merge = (...values) =>
-// {
-//     const ln = values.length,
-//           base = values[0] || {};
-//     for (let i = 1; i < ln; i++)
-//     {
-//         const object = values[i] || {};
-//         Object.keys(object)/* .filter(key => ({}.hasOwnProperty.call(object, key)))*/.forEach((key) =>
-//         {
-//             const value = object[key];
-//             if (isObject(value))
-//             {
-//                 const sourceKey = base[key];
-//                 if (isObject(sourceKey))
-//                 {
-//                     merge(sourceKey, value);
-//                 }
-//                 // else if (isArray(sourceKey) && isArray(value)) {
-//                 //     base[key] = [ ...sourceKey, ...clone(value) ];
-//                 // }
-//                 else {
-//                     base[key] = clone(value);
-//                 }
-//             }
-//             else {
-//                 base[key] = value;
-//             }
-//         });
-//     }
-//     return /** @type {T} */(base);
-// };
 
 
 /**
@@ -273,61 +210,6 @@ const mergeWeak = (...values) => mergeExt(false, false, false, ...values);
  * @throws {Error}
  */
 const mergeIf = (...values) => mergeExt(true, true, false, ...values);
-// const mergeIf = (...values) =>
-// {
-//     const ln = values.length,
-//           base = values[0] || {};
-//     for (let i = 1; i < ln; i++)
-//     {
-//         const object = values[i] || {};
-//         Object.keys(object)/* .filter(key => ({}.hasOwnProperty.call(object, key)))*/.forEach((key) =>
-//         {
-//             const value = object[key];
-//             if (isObject(value))
-//             {
-//                 const sourceKey = base[key];
-//                 if (isObject(sourceKey))
-//                 {
-//                     mergeIf(sourceKey, value);
-//                 }
-//                 // else if (isArray(sourceKey) && isArray(value)) {
-//                 //     base[key] = [ ...sourceKey, ...clone(value) ];
-//                 // }
-//                 else {
-//                     base[key] = clone(value);
-//                 }
-//             }
-//             else {
-//                 base[key] = clone(value);
-//             }
-//         });
-//     }
-//     return /** @type {T} */(base);
-// };
-// const mergeIf = (...destination) =>
-// {
-//     const ln = destination.length,
-//           base = destination[0] || {};
-//     for (let i = 1; i < ln; i++)
-//     {
-//         const object = destination[i] || {};
-//         for (const key in object)
-//         {
-//             if (!(key in base))
-//             {
-//                 const value = /** @type {Partial<T>} */(object[key]);
-//                 if (isObject(value))
-//                 {
-//                     base[key] = clone(value);
-//                 }
-//                 else {
-//                     base[key] = value;
-//                 }
-//             }
-//         }
-//     }
-//     return /** @type {T} */(base);
-// };
 
 
 /**
