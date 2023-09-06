@@ -21,6 +21,11 @@ export function isArray<T>(v: T | T[], allowEmp?: boolean): v is T[];
  */
 export function isBoolean(v: any): v is boolean;
 /**
+ * @param {any} v
+ * @returns {boolean}
+ */
+export function isDefined(path: string): boolean;
+/**
  * @param {string} path
  * @returns {boolean}
  */
@@ -37,6 +42,11 @@ export function isDate(v: any): v is Date;
  */
 export function isEmpty(v: any, allowEmpStr?: boolean): v is "" | [];
 /**
+ * @param {any} v Variable to check to see if it's an error object
+ * @returns {v is Error}
+ */
+export function isError(v: any): v is Error;
+/**
  * @param {any} v Variable to check to see if it's and empty object
  * @returns {boolean}
  */
@@ -46,6 +56,16 @@ export function isFunction(v: any): boolean;
  * @returns {boolean}
  */
 export function isJsTsConfigPath(path: string | undefined): boolean;
+/**
+ * @param {any} v Variable to check to see if it's an error object
+ * @returns {v is number}
+ */
+export function isNumber(v: any): v is number;
+/**
+ * @param {any} v Variable to check to see if it's an error object
+ * @returns {boolean}
+ */
+export function isNumeric(v: any): boolean;
 /**
  * @template {object | undefined}[T=Record<string, any>]
  * @param {T | undefined | null} v Variable to check to see if it's an array
@@ -77,18 +97,18 @@ export function isPromise<T>(v: any): v is PromiseLike<T>;
  */
 export function isString(v: any, notEmpty?: boolean, stringifyable?: boolean): v is string;
 /**
- * @template {object}T
- * @template {Partial<T> | object} U
+ * @template {object | undefined}T
+ * @template {Partial<T> | object | undefined} U
  * @param {T | Partial<T> | undefined} dst
  * @param {U | T | Partial<T> | undefined} src
  * @param {U | T | Partial<T> | undefined} [defaults]
  * @returns {T}
  * @throws {Error}
  */
-export function apply<T extends object, U extends object | Partial<T>>(dst: T | Partial<T>, src: T | Partial<T> | U, defaults?: T | Partial<T> | U): T;
+export function apply<T extends object | undefined, U extends object | undefined | Partial<T>>(dst: T | Partial<T>, src: T | Partial<T> | U, defaults?: T | Partial<T> | U): NonNullable<T>;
 /**
- * @template {object}T
- * @template {Partial<T> | object} U
+ * @template {object | undefined}T
+ * @template {Partial<T> | object | undefined} U
  * @param {boolean} onlyIf merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} deepArr merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {T | Partial<T> | undefined} dst
@@ -97,18 +117,18 @@ export function apply<T extends object, U extends object | Partial<T>>(dst: T | 
  * @returns {T}
  * @throws {Error}
  */
-export function applyExt<T extends object, U extends object | Partial<T>>(onlyIf: boolean, deepArr: boolean, dst: T | Partial<T>, src: T | Partial<T> | U, defaults?: T | Partial<T> | U): T;
+export function applyExt<T extends object | undefined, U extends object | undefined | Partial<T>>(onlyIf: boolean, deepArr: boolean, dst: T | Partial<T>, src: T | Partial<T> | U, defaults?: T | Partial<T> | U): NonNullable<T>;
 /**
  * Copies all the properties of config to object if they don't already exist.
  *
- * @template {object}T
- * @template {Partial<T> | object} U
+ * @template {object | undefined}T
+ * @template {Partial<T> | object | undefined} U
  * @param {T | Partial<T> | undefined} dst
  * @param {U | T | Partial<T> | undefined} src
  * @returns {T}
  * @throws {Error}
  */
-export function applyIf<T extends object, U extends object | Partial<T>>(dst: T | Partial<T>, src: T | Partial<T> | U): T;
+export function applyIf<T extends object | undefined, U extends object | undefined | Partial<T>>(dst: T | Partial<T>, src: T | Partial<T> | U): NonNullable<T>;
 /**
  * @template T
  * @param {T} item

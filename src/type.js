@@ -42,6 +42,13 @@ const isDate = (v) => !!v && Object.prototype.toString.call(v) === "[object Date
 
 
 /**
+ * @param {any} v Variable to check to see if it's defined
+ * @returns {boolean}
+ */
+const isDefined = (v) => typeof v !== "undefined";
+
+
+/**
  * @param {string} path
  * @returns {boolean}
  */
@@ -57,6 +64,13 @@ const isEmpty = (v, allowEmpStr) => v === null || v === undefined || (!allowEmpS
 
 
 /**
+ * @param {any} e Variable to check to see if it's an error
+ * @returns {v is Error}
+ */
+const isError = (e) => e instanceof Error;
+
+
+/**
  * @param {any} v Variable to check to see if it's and empty object
  * @returns {boolean}
  */
@@ -68,6 +82,20 @@ const isFunction = (v) => !!v && typeof v === "function";
  * @returns {boolean}
  */
 const isJsTsConfigPath = (path) => !!path && isString(path, true) && /[\\\/]\.?(?:j|t)sconfig\.(?:[\w\-]+?\.)?json/.test(path);
+
+
+/**
+ * @param {any} v Variable to check to see if it's a number
+ * @returns {v is number}
+ */
+const isNumber = (v) => (v || v === 0) && typeof v === "number" && isFinite(v);
+
+
+/**
+ * @param {any} v Variable to check to see if it's a number
+ * @returns {boolean}
+ */
+const isNumeric = (v) => !isNaN(parseFloat(v)) && isFinite(v);
 
 
 /**
@@ -113,6 +141,6 @@ const isString = (v, notEmpty, stringifyable) =>
 
 
 module.exports = {
-    isArray, isBoolean, isDirectory, isDate, isEmpty, isFunction, isJsTsConfigPath, isObject,
-    isObjectEmpty, isPrimitive, isPromise, isString
+    isArray, isBoolean, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath, isNumber,
+    isNumeric, isObject, isObjectEmpty, isPrimitive, isPromise, isString
 };
