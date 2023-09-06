@@ -19,10 +19,11 @@ tryStringObject = (/** @type {{}} */ value) => { try { strValue.call(value); ret
 
 
 /**
+ * If `false`, return false if v is an empty array
  * @template T
  * @param {T} v Variable to check to see if it's an array
- * @param {boolean} [allowEmp] If `true`, return true if v is an empty array
- * @returns {v is T[]}
+ * @param {boolean} [allowEmp] @default true
+ * @returns {v is T[]} v is T[]
  */
 const isArray = (v, allowEmp) => !!v && Array.isArray(v) && (allowEmp !== false || v.length > 0);
 
@@ -57,7 +58,7 @@ const isDirectory = (path) => existsSync(path) && lstatSync(path).isDirectory();
 
 /**
  * @param {any} v Variable to check to see if it's an array
- * @param {boolean} [allowEmpStr] If `true`, return non-empty if isString(v) and v === ""
+ * @param {boolean} [allowEmpStr] @default false If `true`, returns non-empty if v === ""
  * @returns {v is null | undefined | "" | []}
  */
 const isEmpty = (v, allowEmpStr) => v === null || v === undefined || (!allowEmpStr ? v === "" : false) || (isArray(v) && v.length === 0) || (isObject(v) && isObjectEmpty(v));
