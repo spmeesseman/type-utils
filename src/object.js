@@ -15,14 +15,14 @@ const { isDate, isArray, isObject } = require("./type");
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}} U
+ * @template {object | undefined} T
+ * @template {T | Partial<T> | object | undefined} U
  * @param {boolean} onlyIf merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} deepArr merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {T | Partial<T> | undefined} dst
- * @param {U | T | Partial<T> | undefined} src
- * @param {U | T | Partial<T> | undefined} [defaults]
- * @returns {T}
+ * @param {U} src
+ * @param {U} [defaults]
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
@@ -31,7 +31,7 @@ const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
         dst = {};
     }
     if (!src) {
-        src = {};
+        src = /** @type {U} */({});
     }
     if (!isObject(dst) || !isObject(src)) {
         throw new Error("base argument is not an object");
@@ -45,17 +45,17 @@ const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
             dst[key] = src[key];
         }
     }
-    return /** @type {T} */(dst);
+    return /** @type {NonNullable<T & U>} */(dst);
 };
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}} U
+ * @template {object} T
+ * @template {T | Partial<T> | object | undefined}  U
  * @param {T | Partial<T> | undefined} dst
- * @param {U | T | Partial<T> | undefined} src
- * @param {U | T | Partial<T> | undefined} [defaults]
- * @returns {T}
+ * @param {U} src
+ * @param {U} [defaults]
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults);
@@ -64,11 +64,11 @@ const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults)
 /**
  * Copies all the properties of config to object if they don't already exist.
  *
- * @template {{}} T
- * @template {Partial<T> | {}} U
+ * @template {object} T
+ * @template {T | Partial<T> | object | undefined}  U
  * @param {T | Partial<T> | undefined} dst
- * @param {U | T | Partial<T> | undefined} src
- * @returns {T}
+ * @param {U} src
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const applyIf = (dst, src) => applyExt(true, false, dst, src);
@@ -78,6 +78,7 @@ const applyIf = (dst, src) => applyExt(true, false, dst, src);
  * @template T
  * @param {T} item
  * @returns {T}
+ * @throws {Error}
  */
 const clone = (item) =>
 {
@@ -97,10 +98,18 @@ const clone = (item) =>
     if (isObject(item))
     {
         const c = {};
-        Object.keys((item)).forEach((key) =>
-        {
-            c[key] = clone(item[key]);
-        });
+        try {
+            Object.keys((item)).forEach((key) =>
+            {
+                c[key] = clone(item[key]);
+            });
+        }
+        catch (e) {
+            throw new Error(
+                `check circular references: object type '${item.constructor.name}\nkeys: ` +
+                Object.keys(item).join("|") + "\n" + e.message
+            );
+        }
         return /** @type {T} */(c);
     }
     return item;
@@ -109,9 +118,9 @@ const clone = (item) =>
 
 /**
  * @template {object} T
- * @template {Partial<T> | object} U
+ * @template {T | Partial<T> | object | undefined} U
  * @param {MergeOptions} options
- * @returns {T}
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const mergeExt2 = (options) =>
@@ -120,12 +129,12 @@ const mergeExt2 = (options) =>
 
 /**
  * @template {object | undefined} T
- * @template {Partial<T> | object | undefined}  U
+ * @template {T | Partial<T> | object | undefined}  U
  * @param {boolean} [onlyIf] merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} [deepObj] if both dst and src values to merge are objects, merge properties (relevant if {@link onlyIf} parameter is `true`)
  * @param {boolean} [deepArr] merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
- * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values array of objects to merge, where the fist object is the `base` object that's returned in the merged state
- * @returns {NonNullable<T>}
+ * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values array of objects to merge, where the fist object is the `base` object that's returned in the merged state
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
@@ -178,45 +187,45 @@ const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
             }
         }
     }
-    return /** @type {NonNullable<T>} */(base);
+    return /** @type {NonNullable<T & U>} */(base);
 };
 
 
 /**
  * @template {object | undefined} T
- * @template {Partial<T> | object | undefined}  U
- * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {NonNullable<T>}
+ * @template {T | Partial<T> | object | undefined}  U
+ * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const merge = (...values) => mergeExt(false, true, false, ...values);
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}}  U
- * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {T}
+ * @template {object | undefined} T
+ * @template {T | Partial<T> | object | undefined}  U
+ * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const mergeWeak = (...values) => mergeExt(false, false, false, ...values);
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}}  U
- * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {T}
+ * @template {object | undefined} T
+ * @template {T | Partial<T> | object | undefined}  U
+ * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const mergeIf = (...values) => mergeExt(true, true, false, ...values);
 
 
 /**
- * @template {{}} T
- * @template {Partial<T> | {}}  U
- * @param {[ (T | Partial<T> | undefined), ...(U | T | Partial<T> | undefined)[]]} values
- * @returns {T}
+ * @template {object | undefined} T
+ * @template {T | Partial<T> | object | undefined}  U
+ * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
+ * @returns {NonNullable<T & U>}
  * @throws {Error}
  */
 const mergeIfWeak = (...values) => mergeExt(true, false, false, ...values);
