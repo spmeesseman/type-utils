@@ -1,12 +1,12 @@
 {
-    "projectName":              "test-utils",
+    "projectName":              "type-utils",
     "branch":                   "main",
     "buildCommand":             "npm run rebuild-prod",
     "changelogFile":            "CHANGELOG.md",
     "distReleasePathSrc":       "dist",
     "githubAssets": [
         "CHANGELOG.md|Changelog File",
-        "dist\\test-utils.tgz|NPM Tarball"
+        "dist\\type-utils.tgz|NPM Tarball"
     ],
     "githubRelease":            "Y",
     "githubUser":               "spmeesseman",
@@ -16,9 +16,9 @@
     "npmRelease":               "Y",
     "npmScope":                 "@spmeesseman",
     "promptVersion":            "Y",
-    "repo":                     "https://github.com/spmeesseman/test-utils.git",
+    "repo":                     "https://github.com/spmeesseman/type-utils.git",
     "repoType":                 "git",
     "skipChangelogEdits":       "N",
     "skipVersionEdits":         "Y",
-    "vcWebPath":                "https://github.com/spmeesseman/test-utils"
+    "vcWebPath":                "https://github.com/spmeesseman/type-utils"
 }

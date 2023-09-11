@@ -13,13 +13,13 @@ module.exports = {
         createDefaultProgram: true
     },
     ignorePatterns: [
-        "**/test-fixture/**/*.js",
+        "test-fixture/**/*.js",
         "*.json",
-        "**/node_modules/**",
+        "node_modules/**",
         "**/.eslint*",
         "dist/**",
-        "**/examples/**",
-        "**/.vscode-test/**"
+        "example/**",
+        ".vscode-test/**"
     ],
     settings: {
       jsdoc: {

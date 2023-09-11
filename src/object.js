@@ -22,7 +22,7 @@ const { isDate, isArray, isObject } = require("./type");
  * @param {T | Partial<T> | undefined} dst
  * @param {U} src
  * @param {U} [defaults]
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
@@ -55,7 +55,7 @@ const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
  * @param {T | Partial<T> | undefined} dst
  * @param {U} src
  * @param {U} [defaults]
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults);
@@ -68,7 +68,7 @@ const apply = (dst, src, defaults) => applyExt(false, false, dst, src, defaults)
  * @template {T | Partial<T> | object | undefined}  U
  * @param {T | Partial<T> | undefined} dst
  * @param {U} src
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const applyIf = (dst, src) => applyExt(true, false, dst, src);
@@ -77,7 +77,7 @@ const applyIf = (dst, src) => applyExt(true, false, dst, src);
 /**
  * @template T
  * @param {T} item
- * @returns {T}
+ * @returns {T} T
  * @throws {Error}
  */
 const clone = (item) =>
@@ -120,7 +120,7 @@ const clone = (item) =>
  * @template {object} T
  * @template {T | Partial<T> | object | undefined} U
  * @param {MergeOptions} options
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const mergeExt2 = (options) =>
@@ -134,7 +134,7 @@ const mergeExt2 = (options) =>
  * @param {boolean} [deepObj] if both dst and src values to merge are objects, merge properties (relevant if {@link onlyIf} parameter is `true`)
  * @param {boolean} [deepArr] merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values array of objects to merge, where the fist object is the `base` object that's returned in the merged state
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
@@ -195,7 +195,7 @@ const mergeExt = (onlyIf, deepObj, deepArr, ...values) =>
  * @template {object | undefined} T
  * @template {T | Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const merge = (...values) => mergeExt(false, true, false, ...values);
@@ -205,7 +205,7 @@ const merge = (...values) => mergeExt(false, true, false, ...values);
  * @template {object | undefined} T
  * @template {T | Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const mergeWeak = (...values) => mergeExt(false, false, false, ...values);
@@ -215,7 +215,7 @@ const mergeWeak = (...values) => mergeExt(false, false, false, ...values);
  * @template {object | undefined} T
  * @template {T | Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const mergeIf = (...values) => mergeExt(true, true, false, ...values);
@@ -225,7 +225,7 @@ const mergeIf = (...values) => mergeExt(true, true, false, ...values);
  * @template {object | undefined} T
  * @template {T | Partial<T> | object | undefined}  U
  * @param {[ (T | Partial<T> | undefined), ...(T|U|Partial<U>)[]]} values
- * @returns {NonNullable<T & U>}
+ * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
 const mergeIfWeak = (...values) => mergeExt(true, false, false, ...values);
@@ -235,7 +235,7 @@ const mergeIfWeak = (...values) => mergeExt(true, false, false, ...values);
  * @template {{}} [T=Record<string, any>]
  * @param {T} value
  * @param {...string} keys
- * @returns {T}
+ * @returns {T} T
  */
 const pick = (value, ...keys) =>
 {
@@ -249,7 +249,7 @@ const pick = (value, ...keys) =>
  * @template {Record<string, T>} T
  * @param {T} value
  * @param {(arg: string) => boolean} pickFn
- * @returns {Partial<T>}
+ * @returns {Partial<T>} Partial<T>
  */
 const pickBy = (value, pickFn) =>
 {
@@ -264,7 +264,7 @@ const pickBy = (value, pickFn) =>
  * @template {keyof T} K
  * @param {T} value
  * @param {...K} keys
- * @returns {Omit<T, K>}
+ * @returns {Omit<T, K>} Omit<T, K>
  */
 const pickNot = (value, ...keys) =>
 {
@@ -273,7 +273,10 @@ const pickNot = (value, ...keys) =>
     return ret;
 };
 
+const objUtils = {
+    apply, applyExt, applyIf, clone, merge, mergeExt, mergeExt2, mergeIf, mergeWeak, mergeIfWeak, pick, pickBy, pickNot
+};
 
 module.exports = {
-    apply, applyExt, applyIf, clone, merge, mergeExt, mergeExt2, mergeIf, mergeWeak, mergeIfWeak, pick, pickBy, pickNot
+    apply, applyExt, applyIf, clone, merge, mergeExt, mergeExt2, mergeIf, mergeWeak, mergeIfWeak, objUtils, pick, pickBy, pickNot
 };

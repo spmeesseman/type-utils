@@ -42,7 +42,8 @@
       "useUnknownInCatchVariables": false
     },
     "include": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "src/**/*.d.ts"
     ],
     "exclude": [
         ".*",
