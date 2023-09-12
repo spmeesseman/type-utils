@@ -25,6 +25,11 @@ export function isBoolean(v: any): v is boolean;
  * @param {any} v
  * @returns {boolean} boolean
  */
+export function isClass(v: any): boolean;
+/**
+ * @param {any} v
+ * @returns {boolean} boolean
+ */
 export function isDefined(path: string): boolean;
 /**
  * @param {string} path

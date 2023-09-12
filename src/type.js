@@ -36,6 +36,23 @@ const isBoolean = (v) => (v === false || v === true) && typeof v === "boolean";
 
 
 /**
+ * @param {any} v Variable to check to see if it's a "class instance"
+ * @returns {boolean} boolean
+ */
+const isClass = (v) =>
+{
+    const isCtorClass = v.constructor &&
+                        v.constructor.toString().substring(0, 5) === "class";
+    if (v.prototype === undefined) {
+      return isCtorClass;
+    }
+    const isPrototypeCtorClass = v.prototype.constructor  && v.prototype.constructor.toString &&
+                                 v.prototype.constructor.toString().substring(0, 5) === "class";
+    return isCtorClass || isPrototypeCtorClass;
+};
+
+
+/**
  * @param {any} v Variable to check to see if it's a Date instance
  * @returns {v is Date} v is Date
  */
@@ -149,11 +166,11 @@ const isString = (v, notEmpty, stringifyable) =>
 
 
 const typeUtils = {
-    isArray, isBoolean, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
+    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
     isNulled, isNumber, isNumeric, isObject, isObjectEmpty, isPrimitive, isPromise, isString
 };
 
 module.exports = {
-    isArray, isBoolean, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
+    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
     isNulled, isNumber, isNumeric, isObject, isObjectEmpty, isPrimitive, isPromise, isString, typeUtils
 };
