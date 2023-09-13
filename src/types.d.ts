@@ -78,12 +78,12 @@ export function isNumber(v: any): v is number;
  */
 export function isNumeric(v: any): boolean;
 /**
- * @template {object} T
+ * @template {any} T
  * @param {T | undefined | null} v Variable to check to see if it's an array
  * @param {boolean} [allowArray] If `true`, return true if v is an array
- * @returns { v is NonNullable<T>} v is NonNullable<T>
+ * @returns { v is Extract<T, object>} v is NonNullable<T>
  */
-export function isObject<T extends object>(v: T | undefined | null, allowArray?: boolean): v is NonNullable<T>;
+export function isObject<T extends any>(v: T | undefined | null, allowArray?: boolean): v is Extract<T, object>;
 /**
  * @param {any} v Variable to check to see if it's and empty object
  * @returns {boolean} boolean

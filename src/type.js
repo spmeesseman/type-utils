@@ -124,10 +124,10 @@ const isNumeric = (v) => !isNaN(parseFloat(v)) && isFinite(v);
 
 
 /**
- * @template {object} T
+ * @template {any} T
  * @param {T | undefined | null} v Variable to check to see if it's an array
  * @param {boolean} [allowArray] If `true`, return true if v is an array
- * @returns {v is NonNullable<T>} v is NonNullable<T>
+ * @returns {v is Extract<T, object>} v is Object<T>
  */
 const isObject = (v, allowArray) => !!v && Object.prototype.toString.call(v) === "[object Object]" && (v instanceof Object || typeof v === "object") && (allowArray || !isArray(v));
 
