@@ -235,6 +235,7 @@ export const objUtils = {
 export const typeUtils = {
   isArray,
   isBoolean,
+  isClass,
   isDate,
   isDefined,
   isDirectory,
