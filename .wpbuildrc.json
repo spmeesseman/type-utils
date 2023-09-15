@@ -3,7 +3,7 @@
     "builds": [{
         "name": "webpack-wrap",
         "target": "node",
-        "type": "module",
+        "type": "app",
         "log": {
             "color": "cyan"
         },
@@ -29,7 +29,7 @@
         },
         "options": {
             "types": {
-                "mode": "module",
+                "mode": "plugin",
                 "entry": "./src/core/rc.js",
                 "bundle": true
             }
@@ -72,10 +72,9 @@
             "options": {
                 "wait": {
                     "items": [{
-                        "type": "event",
-                        "name": "done",
-                        "target": "types",
-                        "timeout": 5000
+                        "mode":"event",
+                        "name": "types",
+                        "timeout": 7000
                     }]
                 }
             },
@@ -92,8 +91,7 @@
         "pad": {
             "base": 0,
             "envTag": 19,
-            "value": 40,
-            "uploadFileName": 50
+            "value": 40
         },
         "colors": {
             "default": "grey"

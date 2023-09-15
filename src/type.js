@@ -21,8 +21,8 @@ tryStringObject = (/** @type {{}} */ value) => { try { strValue.call(value); ret
 /**
  * If `false`, return false if v is an empty array
  * @template T
- * @param {T} v Variable to check to see if it's an array
- * @param {boolean} [allowEmp] @default true
+ * @param {T | T[] | any} v Variable to check to see if it's an array
+ * @param {boolean} [allowEmp] If `true`, return true if v is an empty array
  * @returns {v is T[]} v is T[]
  */
 const isArray = (v, allowEmp) => !!v && Array.isArray(v) && (allowEmp !== false || v.length > 0);

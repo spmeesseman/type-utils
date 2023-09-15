@@ -11,11 +11,11 @@
 export declare interface MergeOptions<T, U> { onlyIf?: boolean; deepObj?: boolean;  deepArr?: boolean; values?: (T | Partial<T> | U)[] }
 /**
  * @template T
- * @param {T | T[]} v Variable to check to see if it's an array
+ * @param {T | T[] | any} v Variable to check to see if it's an array
  * @param {boolean} [allowEmp] If `true`, return true if v is an empty array
  * @returns {v is T[]} v is T[]
  */
-export function isArray<T>(v: T | T[], allowEmp?: boolean): v is T[];
+export function isArray<T>(v: T | T[] | any, allowEmp?: boolean): v is T[];
 /**
  * @param {any} v Variable to check to see if it's a primitive boolean type
  * @returns {v is boolean} boolean
@@ -30,7 +30,7 @@ export function isClass(v: any): boolean;
  * @param {any} v
  * @returns {boolean} boolean
  */
-export function isDefined(path: string): boolean;
+export function isDefined(v: any): boolean;
 /**
  * @param {string} path
  * @returns {boolean} boolean
@@ -116,30 +116,30 @@ export function isString(v: any, notEmpty?: boolean, stringifyable?: boolean): v
  * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
-export function apply<T extends object | undefined, U extends object | undefined | Partial<T>>(dst: T | Partial<T>, src: T | U | Partial<U>, defaults?: T | U | Partial<U>): NonNullable<T & U>;
+export function apply<T extends object | undefined, U extends object | undefined | Partial<T>>(dst: T | Partial<T> | undefined, src: T | U | Partial<U> | undefined, defaults?: T | U | Partial<U>): NonNullable<T & U>;
 /**
  * @template {object | undefined}T
  * @template {Partial<T> | object | undefined} U
  * @param {boolean} onlyIf merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} deepArr merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {T | Partial<T> | undefined} dst
- * @param {T | U | Partial<U>} src
+ * @param {T | U | Partial<U> | undefined} src
  * @param {T | U | Partial<U>} [defaults]
  * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
-export function applyExt<T extends object | undefined, U extends object | undefined | Partial<T>>(onlyIf: boolean, deepArr: boolean, dst: T | Partial<T>, src: T | U | Partial<U>, defaults?: T | Partial<T> | U): NonNullable<T & U>;
+export function applyExt<T extends object | undefined, U extends object | undefined | Partial<T>>(onlyIf: boolean, deepArr: boolean, dst: T | Partial<T> | undefined, src: T | U | Partial<U> | undefined, defaults?: T | Partial<T> | U): NonNullable<T & U>;
 /**
  * Copies all the properties of config to object if they don't already exist.
  *
  * @template {object | undefined} T
  * @template {T | Partial<T> | object | undefined} U
  * @param {T | Partial<T> | undefined} dst
- * @param {U} src
+ * @param {T | U | Partial<U> | undefined} src
  * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
-export function applyIf<T extends object | undefined, U extends object | undefined | Partial<T> | T>(dst: T | Partial<T>, src: T | U | Partial<U>): NonNullable<T & U>;
+export function applyIf<T extends object | undefined, U extends object | undefined | Partial<T> | T>(dst: T | Partial<T> | undefined, src: T | U | Partial<U> | undefined): NonNullable<T & U>;
 /**
  * @template T
  * @param {T} item
