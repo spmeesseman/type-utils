@@ -20,8 +20,8 @@ const { isDate, isArray, isObject } = require("./type");
  * @param {boolean} onlyIf merge only if key does not exist in dst object, unless {@link deepObj} is `true` and both dst and src values to merge are objects
  * @param {boolean} deepArr merge array values if both dst and src values to merge are arrays.  Othersise, dst array is set to cloned src array
  * @param {T | Partial<T> | undefined} dst
- * @param {T | U | Partial<U> | undefined} src
- * @param {U} [defaults]
+ * @param {T | U | Partial<T> | Partial<U> | undefined} src
+ * @param {T | U | Partial<T> | Partial<U>} [defaults]
  * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
@@ -54,7 +54,7 @@ const applyExt = (onlyIf, deepArr, dst, src, defaults) =>
  * @template {T | Partial<T> | object | undefined}  U
  * @param {T | Partial<T> | undefined} dst
  * @param {T | U | Partial<U> | undefined} src
- * @param {U} [defaults]
+ * @param {T | U | Partial<T> | Partial<U>} [defaults]
  * @returns {NonNullable<T & U>} NonNullable<T & U>
  * @throws {Error}
  */
