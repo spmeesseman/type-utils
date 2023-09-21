@@ -4,7 +4,7 @@
 const { isDate, isArray, isObject } = require("./type");
 
 /**
- * @file utils/utils.js
+ * @file src/object.js
  * @version 0.0.1
  * @license MIT
  * @copyright Scott P Meesseman 2023

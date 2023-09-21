@@ -2,7 +2,7 @@
 // @ts-check
 
 /**
- * @file utils/utils.js
+ * @file src/types.js
  * @version 0.0.1
  * @license MIT
  * @copyright Scott P Meesseman 2023
@@ -96,13 +96,6 @@ const isFunction = (v) => !!v && typeof v === "function";
 
 
 /**
- * @param {string | undefined} path
- * @returns {boolean} boolean
- */
-const isJsTsConfigPath = (path) => !!path && isString(path, true) && /[\\\/]\.?(?:j|t)sconfig\.(?:[\w\-]+?\.)?json/.test(path);
-
-
-/**
  * @param {any} v Variable to check to see if it's a number
  * @returns {v is number} v is number
  */
@@ -166,11 +159,11 @@ const isString = (v, notEmpty, stringifyable) =>
 
 
 const typeUtils = {
-    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
+    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction,
     isNulled, isNumber, isNumeric, isObject, isObjectEmpty, isPrimitive, isPromise, isString
 };
 
 module.exports = {
-    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction, isJsTsConfigPath,
+    isArray, isBoolean, isClass, isDirectory, isDate, isDefined, isEmpty, isError, isFunction,
     isNulled, isNumber, isNumeric, isObject, isObjectEmpty, isPrimitive, isPromise, isString, typeUtils
 };

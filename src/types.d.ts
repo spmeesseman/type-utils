@@ -1,5 +1,40 @@
 /* eslint-disable jsdoc/check-param-names */
 // @ts-check
+/**
+ * @template T
+ * @param {T | Set<T> | Array<T> | IterableIterator<T>} v Variable to check to see if it's an array
+ * @param {boolean} [shallow] If `true`, and  `arr` is an array, return a shallow copy
+ * @param {boolean} [allowEmpStr] If `false`, return empty array if isString(v) and isEmpty(v)
+ * @returns {Array<NonNullable<T>>}
+ */
+/**
+ * @template T
+ * @param {T | T[] | IterableIterator<T> | Set<T> | undefined} v Variable to check to see if it's an array
+ * @param {boolean} [shallow] If `true`, and  `arr` is an array, return a shallow copy
+ * @param {boolean} [allowEmpStr] If `false`, return empty array if isString(v) and isEmpty(v)
+ * @returns {NonNullable<T>[]}
+ */
+export function asArray<T>(v: T | IterableIterator<T> | Set<T> | T[], shallow?: boolean, allowEmpStr?: boolean): NonNullable<T>[];
+/**
+ * @template T
+ * @param {T[]} arr
+ * @param {...T} items
+ * @returns {T[]}
+ */
+export function pushUniq<T>(arr: T[], ...items: T[]): T[];
+/**
+ * @template T
+ * @param {any[]} arr
+ * @param {T} item
+ * @returns {T}
+ */
+export function pushReturn<T>(arr: any[], items: T): T;
+/**
+     * @template T
+     * @param {T[]} a
+     * @returns {T[]}
+     */
+export function uniq<T>(a: T[]): T[];
  /**
   * @template T, U
   * @typedef {object} MergeOptions
@@ -57,11 +92,6 @@ export function isError(v: any): v is Error;
  * @returns {boolean} boolean
  */
 export function isFunction(v: any): boolean;
-/**
- * @param {string | undefined} path
- * @returns {boolean} boolean
- */
-export function isJsTsConfigPath(path: string | undefined): boolean;
 /**
  * @param {any} v Variable to check to see if it's null or undefined
  * @returns {v is null | undefined} v is null | undefined
@@ -218,6 +248,13 @@ export function pickBy<T extends Record<string, T>>(value: T, pickFn: (arg: stri
  * @returns {Omit<T, K>} Omit<T, K>
  */
 export function pickNot<T extends object, K extends keyof T>(value: T, ...keys: K[]): Omit<T, K>;
+
+export const arrUtils = {
+  asArray,
+  pushReturn,
+  pushUniq,
+  uniq
+};
 
 export const objUtils = {
   apply,
