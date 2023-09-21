@@ -56,17 +56,8 @@
         "rebuild-prod": "npm run clean-all && npm run build-prod",
         "rebuild-types": "npm run clean-types &&  && npm run build-types"
     },
-    "bundleDependencies": [
-        "resolve-from",
-        "source-map-support"
-    ],
-    "optionalDependencies": {
-        "mocha": "^10.2.0",
-        "nyc": "^15.1.0"
-    },
     "devDependencies": {
         "@spmeesseman/eslint-plugin": "^1.0.0",
-        "@spmeesseman/webpack-wrap": "file:../webpack-wrap",
         "@types/glob": "^8.1.0",
         "@types/mocha": "^9.1.0",
         "@types/node": "^16.18.34",
