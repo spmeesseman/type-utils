@@ -16,6 +16,10 @@
         "type": "git",
         "url": "https://github.com/spmeesseman/type-utils.git"
     },
+    "funding": {
+        "type": "paypal",
+        "url": "https://www.paypal.com/donate/?hosted_button_id=VNYX9PP5ZT5F8"
+    },
     "categories": [
         "Other"
     ],
@@ -60,11 +64,9 @@
         "mocha": "^10.2.0",
         "nyc": "^15.1.0"
     },
-    "dependencies": {
-    },
     "devDependencies": {
         "@spmeesseman/eslint-plugin": "^1.0.0",
-		"@spmeesseman/webpack-wrap": "file:../@spmeesseman/webpack-wrap",
+        "@spmeesseman/webpack-wrap": "file:../webpack-wrap",
         "@types/glob": "^8.1.0",
         "@types/mocha": "^9.1.0",
         "@types/node": "^16.18.34",
@@ -79,6 +81,6 @@
         "eslint-plugin-prefer-arrow": "^1.2.3",
         "eslint-plugin-prettier": "^4.2.1",
         "rimraf": "^5.0.1",
-		"typescript": "^4.5.5"
+        "typescript": "^4.5.5"
     }
 }

@@ -37,14 +37,14 @@
  * RC DEFAULTS : file:///c:\Projects\vscode-taskexplorer\webpack\utils\app.js
  */
 
-const WpwRc = require("@spmeesseman/webpack-wrap/src/core/rc");
-const typedefs = require("@spmeesseman/webpack-wrap/src/types/typedefs");
+const WpwRc = require("@spmeesseman/webpack-wrap/src/core/wrapper.js");
+const typedefs = require("@spmeesseman/webpack-wrap/src/types/typedefs.js");
 /**
  * Exports Webpack build configs to the webpack engine... the build(s) start here. Eenvironment "flags"
  * in arge should be set on the cmd line e.g. `--env=property`, as opposed to `--env property=true`,
  * but any "boolean strings" will be converted to `true` to a booleans
  *
- * @param {typedefs.WpBuildRuntimeEnvArgs} arge Environment variable containing runtime options
+ * @param {typedefs.WpwRuntimeEnvArgs} arge Environment variable containing runtime options
  * passed to webpack on the command line (e.g. `webpack --env environment=test --env clean=true`) as
  * opposed to the "correct" way i.e. webpack --env environment=test --env clean`
  * @param {typedefs.WebpackRuntimeArgs} argv Webpack command line args
