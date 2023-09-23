@@ -108,17 +108,17 @@ export function isNumber(v: any): v is number;
  */
 export function isNumeric(v: any): boolean;
 /**
- * @template {any} T
+ * @template T
  * @param {T | undefined | null} v Variable to check to see if it's an array
  * @param {boolean} [allowArray] If `true`, return true if v is an array
- * @returns { v is Extract<T, object>} v is NonNullable<T>
+ * @returns {v is Extract<T, object>} v is Object<T>
  */
-export function isObject<T extends any>(v: T | undefined | null, allowArray?: boolean): v is Extract<T, object>;
+export function isObject<T>(v: T | undefined | null, allowArray?: boolean): v is Extract<T, object>;
 /**
  * @param {any} v Variable to check to see if it's and empty object
- * @returns {boolean} boolean
+ * @returns {v is Record<string, never>} boolean
  */
-export function isObjectEmpty(v: any): boolean;
+export function isObjectEmpty(v: any): v is Record<string, never>;
 /**
  * @param {any} v Variable to check to see if it's a primitive type (i.e. boolean / number / string)
  * @returns {v is boolean | number | string} v is boolean | number | string

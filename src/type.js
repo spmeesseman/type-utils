@@ -117,7 +117,7 @@ const isNumeric = (v) => !isNaN(parseFloat(v)) && isFinite(v);
 
 
 /**
- * @template {any} T
+ * @template T
  * @param {T | undefined | null} v Variable to check to see if it's an array
  * @param {boolean} [allowArray] If `true`, return true if v is an array
  * @returns {v is Extract<T, object>} v is Object<T>
@@ -127,7 +127,7 @@ const isObject = (v, allowArray) => !!v && Object.prototype.toString.call(v) ===
 
 /**
  * @param {any} v Variable to check to see if it's and empty object
- * @returns {boolean} boolean
+ * @returns {v is Record<string, never>} v is {}
  */
 const isObjectEmpty = (v) => { if (isObject(v)) { return Object.keys(v).filter(k => ({}.hasOwnProperty.call(v, k))).length === 0; } return true; };
 
