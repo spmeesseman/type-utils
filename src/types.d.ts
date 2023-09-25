@@ -77,11 +77,11 @@ export function isDirectory(path: string): boolean;
  */
 export function isDate(v: any): v is Date;
 /**
- * @param {any} v Variable to check to see if it's an array
+ * @param {any} v Variable to check for emptiness
  * @param {boolean} [allowEmpStr] If `true`, return non-empty if isString(v) and v === ""
- * @returns {v is null | undefined | "" | []} v is null | undefined | "" | []
+ * @returns {v is null | undefined | "" | [] | Record<string, never>} v is null | undefined | "" | [] | {}
  */
-export function isEmpty(v: any, allowEmpStr?: boolean): v is "" | [];
+export function isEmpty(v: any, allowEmpStr?: boolean): v is "" | [] | Record<string, never>;
 /**
  * @param {any} v Variable to check to see if it's an error object
  * @returns {v is Error} v is Error

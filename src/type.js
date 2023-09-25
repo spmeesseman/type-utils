@@ -74,9 +74,9 @@ const isDirectory = (path) => existsSync(path) && lstatSync(path).isDirectory();
 
 
 /**
- * @param {any} v Variable to check to see if it's an array
- * @param {boolean} [allowEmpStr] @default false If `true`, returns non-empty if v === ""
- * @returns {v is null | undefined | "" | []} v is null | undefined | "" | []
+ * @param {any} v Variable to check for emptiness
+ * @param {boolean} [allowEmpStr] If `true`, return non-empty if isString(v) and v === ""
+ * @returns {v is null | undefined | "" | [] | Record<string, never>} v is null | undefined | "" | [] | {}
  */
 const isEmpty = (v, allowEmpStr) => v === null || v === undefined || (!allowEmpStr ? v === "" : false) || (isArray(v) && v.length === 0) || (isObject(v) && isObjectEmpty(v));
 
