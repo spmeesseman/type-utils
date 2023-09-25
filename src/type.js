@@ -90,7 +90,7 @@ const isError = (e) => e instanceof Error;
 
 /**
  * @param {any} v Variable to check to see if it's and empty object
- * @returns {boolean} boolean
+ * @returns {v is (...args: any) => any} v is Function
  */
 const isFunction = (v) => !!v && typeof v === "function";
 

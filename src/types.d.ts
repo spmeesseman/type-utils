@@ -88,10 +88,10 @@ export function isEmpty(v: any, allowEmpStr?: boolean): v is "" | [];
  */
 export function isError(v: any): v is Error;
 /**
- * @param {any} v Variable to check to see if it's and empty object
- * @returns {boolean} boolean
+ * @param {any} v Variable to check to see if it's a function
+ * @returns {v is (...args: any) => any} v is Function
  */
-export function isFunction(v: any): boolean;
+export function isFunction(v: any): v is (...args: any) => any;
 /**
  * @param {any} v Variable to check to see if it's null or undefined
  * @returns {v is null | undefined} v is null | undefined
