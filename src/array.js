@@ -29,11 +29,11 @@ const hasIterator = (v) => !!v && hasIteratorTag() && isFunction(typeof v[Symbol
 
 /**
  * @template T
- * @param {any[]} arr
- * @param {T} item
- * @returns {T}
+ * @param {T[]} arr
+ * @param {...T} items
+ * @returns {T[]}
  */
-const pushReturn = (arr, item) => { arr.push(item); return item; };
+const pushReturn = (arr, ...items) => { arr.push(...items); return arr; };
 
 
 /**

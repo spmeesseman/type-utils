@@ -24,11 +24,11 @@ export function asArray<T>(v: T | IterableIterator<T> | Set<T> | T[], shallow?: 
 export function pushUniq<T>(arr: T[], ...items: T[]): T[];
 /**
  * @template T
- * @param {any[]} arr
- * @param {T} item
+ * @param {T[]} arr
+ * @param {...T} items
  * @returns {T}
  */
-export function pushReturn<T>(arr: any[], items: T): T;
+export function pushReturn<T>(arr: any[], ...items: T[]): T[];
 /**
      * @template T
      * @param {T[]} a
