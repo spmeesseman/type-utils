@@ -249,6 +249,28 @@ export function pickBy<T extends Record<string, T>>(value: T, pickFn: (arg: stri
  */
 export function pickNot<T extends object, K extends keyof T>(value: T, ...keys: K[]): Omit<T, K>;
 
+/**
+ * @param {string} value
+ * @returns {string}
+ */
+export function capitalize(value: string): string;
+
+/**
+ * @param {string} value
+ * @param {number} length
+ * @param {boolean | undefined} [word]
+ * @returns {string}
+ */
+export function ellipsis(value: string, length: number, word?: boolean): string;
+
+/**
+ * @param {string | undefined} value
+ * @param {boolean} [removeSpaces]
+ * @returns {string}
+ */
+export function lowerCaseFirstChar(value: string | undefined, removeSpaces?: boolean): string;
+
+
 export const arrUtils = {
   asArray,
   pushReturn,
@@ -267,6 +289,12 @@ export const objUtils = {
   pick,
   pickBy,
   pickNot
+};
+
+export const strUtils = {
+  capitalize,
+  ellipsis,
+  lowerCaseFirstChar
 };
 
 export const typeUtils = {
